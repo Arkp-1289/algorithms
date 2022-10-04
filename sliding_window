@@ -1,0 +1,17 @@
+
+def solve(n,k,l):
+    max_sum=0
+    for i in range(k):
+        max_sum+=l[i]
+    
+    res=max_sum
+
+    for j in range(k,n):
+        max_sum=max_sum+l[j]-l[j-k]
+        res=max(res,max_sum)
+    return res
+
+for i in range(int(input())):
+    n,k=map(int,input().split())
+    l=list(map(int,input().split()))
+    print(solve(n,k,l))
