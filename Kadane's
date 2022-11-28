@@ -1,0 +1,34 @@
+psudo code
+
+max_end=min_int
+curr_max=0
+loop
+   curr_max+=a[i]
+   max_end=max(curr_max,max_end)
+   if curr_max<0 then curr_max=0
+return max_end
+
+
+
+
+
+
+
+
+
+
+
+
+import sys
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        max_end=~sys.maxsize
+        curr_max=0
+        for i in nums:
+            curr_max+=i
+            if curr_max>max_end:
+                max_end=curr_max
+            if curr_max<0:
+                curr_max=0
+        return max_end
+        
