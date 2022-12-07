@@ -1,0 +1,21 @@
+def solve(n):
+    res=[-1]*(n+1)
+    # print(res)
+    # answer=fib(n)
+    def fib(n,res):
+        # global res
+        if res[n]==-1:
+            if n== 0 or n==1:
+                r=n;
+            else:
+                r= fib(n-1,res)+fib(n-2,res)
+            res[n]=r
+        return res[n]
+    fib(n,res)
+    return res
+
+
+for _ in range(int(input())):
+    n=int(input())
+    print(solve(n))
+
