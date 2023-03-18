@@ -1,0 +1,26 @@
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        n=len(nums)
+        ind1=-1
+        for i in range(n-2,-1,-1):           /** finding the squence a[i] < a[i+1]**/
+            if nums[i]<nums[i+1]:
+                ind1=i
+                break
+        if ind1 <0:
+            nums.reverse()
+        else: 
+            for i in range(n-1,0,-1):        /** finding the sequence a[i]>a[ind1] and assign it as ind2**/
+                if nums[i]>nums[ind1]:
+                    ind2=i
+                    break
+            nums[ind1],nums[ind2]=nums[ind2],nums[ind1]    /** swapping ind1 and ind2**/
+            i=ind1+1
+            j=n-1
+            while (i<j):                                  /**reversing ind1 to n elements in nums**/
+                nums[i],nums[j]=nums[j],nums[i]
+                i+=1
+                j-=1
+        
+
+        
+    
