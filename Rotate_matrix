@@ -1,0 +1,16 @@
+****MATRIX ROTATION******
+
+mat=[]
+n=int(input())
+m=int(input())
+for i in range(m):
+    l=list(map(int,input().split()))
+    mat.append(l)
+print(mat)
+for i in range(n):                          /** first transpose matrix **/
+    for j in range(m):
+        if (j<=i):
+            mat[i][j],mat[j][i]=mat[j][i],mat[i][j]
+for i in mat:                               /** reverse each row after tranpose **/
+    i.reverse()
+print(mat)
