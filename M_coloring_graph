@@ -1,0 +1,35 @@
+#include <bits/stdc++.h> 
+using namespace std;
+bool possible(int node,int col,int n,vector<vector<int>> &mat,vector<int>&color){
+    for (int i=0;i<n;i++){
+        if (i!=n && mat[i][node]==1 && color[i]==col){return false;}
+    }
+    return true;
+
+
+
+}
+
+
+bool solve(int node,int n,int m,vector<vector<int>> &mat,vector<int>&color ){
+    if (node==n){
+        return true;
+    }
+    for(int c=1;c<=m;c++){
+        if (possible(node,c,n,mat,color)){
+            color[node]=c;
+            if (solve(node+1,n,m,mat,color)){return true;}
+            color[node]=0;
+
+        }
+    }
+    return false;
+}
+
+
+string graphColoring(vector<vector<int>> &mat, int m) {
+    int n=mat.size();
+    vector<int>color(n,0);
+    if (solve(0,n,m,mat,color)){return "YES";};
+    return "NO";
+}
