@@ -1,0 +1,98 @@
+#include<bits/stdc++.h>
+#include <string>	
+using namespace std;
+#define eb emplace_back
+#define pb push_back
+#define nline "\n"
+#define ll long long int
+/********************************************************/
+
+class MinHeap{
+
+    vector<int>heap;                                // creating heap vector
+    int size=0;
+    int left(int i){return 2*i+1;}
+    int right(int i){return 2*i+2;}
+    int parent(int i){return (i-1)/2;}
+
+    public:
+
+        void insert(int element){                     // insert  a new value in heap
+            heap.push_back(element);
+            int i=heap.size()-1;
+            while(i!=0 && heap[parent(i)]>heap[i]){
+                swap(heap[i],heap[parent(i)]);
+                i=parent(i);
+            }
+            size+=1;
+        }
+
+        int  getMinHeap(){
+            if (heap.size()==0){return -1;}
+            return heap[0];
+        }
+
+
+        void heapify(int i){                               // heapify the vector means the parent node is less than the child node
+            int small=i;
+            if (right(i)<size && heap[right(i)]<heap[i]){
+                small=right(i);
+            }
+            if (left(i)<size && heap[left(i)]<heap[i]){
+                small=left(i);
+            }
+            if (small!=i){
+                swap(heap[i],heap[small]);
+                heapify(small);
+            }
+        }
+        void removeMin(){                                        // remove min element in heap  i.e heap[0]
+            size-=1;
+            if (size<0){cout<<"Unable to remove in empty heap"<<endl;return;}
+            heap[0]=heap[size];
+            heap.pop_back(); 
+            heapify(0);
+        }
+        void changekey(int i,int new_element){                      // change the value of heap element at a particular index
+            if (i>=size){cout<<"Not a valid index"<<endl;return ;}
+            heap[i]=new_element;
+            while(i!=0 && heap[parent(i)]>heap[i]){
+                swap(heap[parent(i)],heap[i]);
+                i=parent(i);
+            }
+            heapify(0);
+            cout<< "key "<<i<<" is changed to "<<new_element<<endl;
+        }
+        void deleteKey(int i){                                             // deleting the particular index and heapify it
+            if (i>=size || i<0){cout<<"Not a valid index to delete "<<endl;return ;}
+            changekey(i,INT_MIN);
+            removeMin(); 
+        }
+
+
+        void printHeap(){
+            cout<<"heap is : "<<" ";
+            for (int i=0;i<size;i++){
+                cout<<heap[i]<<" ";
+            }
+            cout<<endl;
+        }
+
+
+};
+int main(){
+    MinHeap h;
+    int n;
+    cin>>n;
+    while(n--){
+        int t;
+        cin>>t;
+        h.insert(t);
+    }
+    h.printHeap();
+    cout<<"Minheap is : "<<h.getMinHeap()<<endl;
+    h.changekey(2,2);
+    h.printHeap();
+    h.deleteKey(2);
+    h.printHeap();
+}
