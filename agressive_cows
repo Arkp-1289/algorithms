@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+bool possible(int mid,int n,int k,vector<int>&s){
+    int limit=s[0],cow=1;
+    for (int i=1;i<n;i++){
+        if (abs(limit-s[i])>=mid){cow+=1;limit=s[i];}
+    }
+    if (cow>=k){
+        return true; 
+    }
+    return false;
+
+
+
+
+}
+
+
+
+
+int aggressiveCows(vector<int> &s, int k)
+{
+    //    Write your code here.
+    int n=s.size();
+    sort(s.begin(),s.end());
+
+    int low=1,high=s[n-1]-s[0],res;
+    while (low<=high){
+        int mid=(low+high)/2;
+        if (possible (mid,n,k,s)){
+            res=mid;
+            low=mid+1;
+        } else{
+            high=mid-1;
+        }
+    }
+    return res;
+}
