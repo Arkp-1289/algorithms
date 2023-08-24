@@ -1,0 +1,17 @@
+long long low=0,high=1,mid,k;
+long long firstOne()
+{
+    // Write your code here.
+    while (!get(high)){ 
+            low=high;
+            high=high*2;
+    }
+    while (low<=high){
+         mid=low+(high-low)/2;
+         k=get(mid);
+        if (k==1 && (mid==0 || get(mid-1)==0)){return mid;}
+        else if (k==1){high=mid-1;}
+        else{low=mid+1;}
+
+    }
+}
